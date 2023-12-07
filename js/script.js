@@ -7,12 +7,29 @@ let arrEmployees = [
     [13413453, "Sue Wedge", 1235, "sue@vectacorp.com", "QA"]
 ]
 
+function init() {
+  console.log('Employee Managment Application')
+  fetch('/data/employees.json')
+}
 // GET DOM ELEMENTS
 let empTable    = document.querySelector('#employees')
 let empCount    = document.querySelector('#empCount')
 
 // BUILD THE EMPLOYEES TABLE WHEN THE PAGE LOADS
 buildGrid(arrEmployees)
+const xhr = new XMLHttpRequest();
+xhr.responseType = 'json';
+xhr.open('GET', '../data/employees.json');
+xhr.send();
+xhr.addEventListener('readystatechange', () => {
+    if (xhr.readyState == 4 && xhr.status == 200) {
+        let employees = xhr.response;
+        for (let employee of employees) {
+            document.body.innerHTML += `${employee.name}<br>${employee.title}<br><br>`;
+        }
+    }
+});
+xhr.onerror = (e) => {console.error(e.message)};
 
 // DELETE EMPLOYEE
 empTable.addEventListener('click', (e) => {
