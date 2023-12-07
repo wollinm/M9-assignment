@@ -17,6 +17,7 @@ let empTable    = document.querySelector('#employees')
 let empCount    = document.querySelector('#empCount')
 
 // BUILD THE EMPLOYEES TABLE WHEN THE PAGE LOADS
+init()
 buildGrid(arrEmployees)
 
 xhr.onerror = (e) => {console.error(e.message)};
